@@ -16,5 +16,16 @@
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 
+<p>
+    <?php
+    $this->load->library('session');
+    if ($this->session->userdata('current_user')) {
+        foreach (get_object_vars($this->session->userdata('current_user')) as $obj) {
+            echo $obj;
+            echo '</br>';
+        }
+    }
+    ?>
+</p>
+
 </body>
-</html>
