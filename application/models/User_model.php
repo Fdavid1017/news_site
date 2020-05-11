@@ -18,11 +18,13 @@ class User_model extends CI_Model {
         return $result;
     }
 
-    public function update($first_name, $second_name, $email, $password) {
+    public function update($first_name, $second_name, $email, $password, $image = null, $roleID = 0) {
         $record = [
             'first_name' => $first_name,
             'second_name' => $second_name,
-            'password' => $password
+            'password' => $password,
+            'profile_picture' => $image,
+            'role_id' => $roleID
         ];
         $this->db->where('email', $email);
         return $this->db->update('user', $record);
@@ -47,12 +49,14 @@ class User_model extends CI_Model {
                         ->row();
     }
 
-    public function insert($first_name, $second_name, $email, $password) {
+    public function insert($first_name, $second_name, $email, $password, $image = null, $roleID = 0) {
         $record = [
             'email' => $email,
             'first_name' => $first_name,
             'second_name' => $second_name,
-            'password' => $password
+            'password' => $password,
+            'profile_picture' => $image,
+            'role_id' => $roleID
         ];
         return $this->db->insert('user', $record);
         return $this->db->insert_id();

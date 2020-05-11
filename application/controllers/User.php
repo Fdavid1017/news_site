@@ -26,10 +26,28 @@ class User extends CI_Controller {
             $this->form_validation->set_rules('password_confirmation', 'Password Again', 'trim|required|matches[password]');
 
             if ($this->form_validation->run() == TRUE) {
+                $upload_config['allowed_types'] = 'jpg|jpeg|png';
+                $upload_config['max_size'] = 5120;
+                $upload_config['min_height'] = 250;
+                $upload_config['min_width'] = 250;
+
+                $upload_config['upload_path'] = './uploads/images/user/';
+                $upload_config['file_name'] = explode('@', $this->input->post('email'))[0];
+                $upload_config['file_ext_tolower'] = TRUE;
+                $upload_config['overwrite'] = TRUE;
+
+                $this->load->library('upload');
+
+                $this->upload->initialize($upload_config);
+                if ($this->upload->do_upload('image') == TRUE) {
+                    echo '<script>console.log("' . $upload_config['file_name'] . ' uploaded succesfully";</script>';
+                }
+
                 $this->user_model->insert($this->input->post('first_name'),
                         $this->input->post('second_name'),
                         $this->input->post('email'),
-                        $this->input->post('password'));
+                        $this->input->post('password'),
+                        $this->upload->data()['file_name']);
 
                 $this->load->helper('url');
                 redirect(base_url('user/login'));

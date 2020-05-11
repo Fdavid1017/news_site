@@ -1,7 +1,6 @@
 <h1>Register</h1>
 <?php
-echo validation_errors();
-echo form_open();
+echo form_open_multipart();
 
 echo form_label('Fisrt name:', 'first_name');
 echo form_input('first_name', set_value('first_name', ''), ['id' => 'first_name', 'required' => 'required']);
@@ -26,6 +25,9 @@ echo '</br>';
 echo form_label('Password again:', 'password_confirmation');
 echo form_password('password_confirmation', set_value('password_confirmation', ''), ['id' => 'password_confirmation', 'required' => 'required']);
 echo form_error('password_confirmation');
+echo '</br>';
+
+echo form_upload('image');
 echo '</br>';
 
 echo form_submit('submit', 'Beküld');

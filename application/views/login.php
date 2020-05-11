@@ -1,6 +1,5 @@
 <h1>Login</h1>
 <?php
-echo validation_errors();
 echo form_open();
 
 echo form_label('Email:', 'email');
