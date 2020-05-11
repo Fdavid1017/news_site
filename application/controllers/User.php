@@ -57,7 +57,7 @@ class User extends CI_Controller {
         $this->load->helper('form');
         $this->load->view('header');
         $this->load->view('navBar');
-        $this->load->view('register');
+        $this->load->view('user/register');
     }
 
     public function Login() {
@@ -79,7 +79,13 @@ class User extends CI_Controller {
         $this->load->helper('form');
         $this->load->view('header');
         $this->load->view('navBar');
-        $this->load->view('login');
+        $this->load->view('user/login');
+    }
+
+    public function ShowProfile() {
+        $this->load->view('header');
+        $this->load->view('navBar');
+        $this->load->view('user/profile');
     }
 
 }

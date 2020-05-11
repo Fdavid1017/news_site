@@ -27,6 +27,12 @@
             </a>
         </div>
     <?php else: ?>
-        <a class="navbar-brand" href="#">Profile</a>
+        <a class="navbar-brand" href="<?php echo base_url('user/showprofile'); ?>">
+            <?php if ($this->uri->segment(2) === 'profile'): ?>
+                <b>Profile</b>
+            <?php else: ?>
+                Profile
+            <?php endif; ?>
+        </a>
     <?php endif; ?>
 </nav>
