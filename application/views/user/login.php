@@ -12,7 +12,7 @@ echo form_password('password', set_value('password', ''), ['id' => 'password', '
 echo form_error('password');
 echo '</br>';
 
-echo form_submit('submit', 'Beküld');
+echo form_submit('submit', 'Login');
 
 echo form_close();
 ?>

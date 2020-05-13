@@ -18,7 +18,7 @@ class User_model extends CI_Model {
         return $result;
     }
 
-    public function update($first_name, $second_name, $email, $password, $image = null, $roleID = 0) {
+    public function update($first_name, $second_name, $email, $password, $image = null, $roleID = 2) {
         $record = [
             'first_name' => $first_name,
             'second_name' => $second_name,
@@ -49,7 +49,7 @@ class User_model extends CI_Model {
                         ->row();
     }
 
-    public function insert($first_name, $second_name, $email, $password, $image = null, $roleID = 0) {
+    public function insert($first_name, $second_name, $email, $password, $image = null, $roleID = 2) {
         $record = [
             'email' => $email,
             'first_name' => $first_name,

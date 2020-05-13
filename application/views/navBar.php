@@ -27,12 +27,17 @@
             </a>
         </div>
     <?php else: ?>
-        <a class="navbar-brand" href="<?php echo base_url('user/showprofile'); ?>">
-            <?php if ($this->uri->segment(2) === 'profile'): ?>
-                <b>Profile</b>
-            <?php else: ?>
-                Profile
-            <?php endif; ?>
-        </a>
+        <div class="btn-group dropleft">
+            <a type="button" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="<?php echo base_url(); ?>/public/icons/people-circle.svg" width="30" height="30" class="d-inline-block align-center" alt="profile">
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="<?php echo base_url('user/showprofile'); ?>">Profile</a>
+                <?php if ($this->session->userdata('current_user')->role_id === '1'): ?>
+                    <a class="dropdown-item" href="#">Manage site</a>
+                <?php endif; ?>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
+        </div>
     <?php endif; ?>
 </nav>

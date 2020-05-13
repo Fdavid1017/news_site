@@ -13,7 +13,7 @@ class User extends CI_Controller {
     public function index() {
         $this->load->view('header');
         $this->load->view('navBar');
-        $this->load->view('welcome_message');
+        $this->load->view('home');
     }
 
     public function Register() {
