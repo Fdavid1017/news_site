@@ -9,6 +9,7 @@ class Welcome extends CI_Controller {
         $this->load->library('session');
         $this->load->model('news_model');
         $this->load->model('category_model');
+        $this->load->model('news_images_model');
     }
 
     public function index() {

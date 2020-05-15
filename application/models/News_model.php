@@ -54,7 +54,7 @@ class News_model extends CI_Model {
             'category_id' => $category_id,
             'add_date' => $add_date,
         ];
-        return $this->db->insert('post', $record);
+        $this->db->insert('post', $record);
         return $this->db->insert_id();
     }
 

@@ -27,7 +27,7 @@ class User extends CI_Controller {
 
             if ($this->form_validation->run() == TRUE) {
                 $upload_config['allowed_types'] = 'jpg|jpeg|png';
-                $upload_config['max_size'] = 5120;
+                $upload_config['max_size'] = 2048;
                 $upload_config['min_height'] = 250;
                 $upload_config['min_width'] = 250;
 
