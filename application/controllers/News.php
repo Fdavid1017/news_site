@@ -1,8 +1,10 @@
 <?php
 
-class News extends CI_Controller {
+class News extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('news_model');
@@ -10,23 +12,27 @@ class News extends CI_Controller {
         $this->load->model('news_images_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->load->helper('form');
         $this->load->view('header');
         $this->load->view('navBar');
         $this->load->view('home');
     }
 
-    public function AddNews() {
+    public function AddNews()
+    {
         if ($this->input->post('submit')) {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('text', 'Text', 'trim|required');
 
             if ($this->form_validation->run() == TRUE) {
-                $postID = $this->news_model->insert($this->session->userdata('current_user')->email,
-                        $this->input->post('text'),
-                        $this->input->post('category_id') + 1,
-                        date("Y-m-d h:i:s"));
+                $postID = $this->news_model->insert(
+                    $this->session->userdata('current_user')->email,
+                    $this->input->post('text'),
+                    $this->input->post('category_id') + 1,
+                    date("Y-m-d h:i:s")
+                );
 
                 $upload_config['allowed_types'] = 'jpg|jpeg|png';
                 $upload_config['max_size'] = 2048;
@@ -43,8 +49,8 @@ class News extends CI_Controller {
                 $this->upload->initialize($upload_config);
                 if ($this->upload->do_upload('image1') == TRUE) {
                     $this->news_images_model->insert(
-                            $postID,
-                            $this->upload->data()['file_name']
+                        $postID,
+                        $this->upload->data()['file_name']
                     );
                 }
 
@@ -52,8 +58,8 @@ class News extends CI_Controller {
                 $this->upload->initialize($upload_config);
                 if ($this->upload->do_upload('image2') == TRUE) {
                     $this->news_images_model->insert(
-                            $postID,
-                            $this->upload->data()['file_name']
+                        $postID,
+                        $this->upload->data()['file_name']
                     );
                 }
 
@@ -61,8 +67,8 @@ class News extends CI_Controller {
                 $this->upload->initialize($upload_config);
                 if ($this->upload->do_upload('image3') == TRUE) {
                     $this->news_images_model->insert(
-                            $postID,
-                            $this->upload->data()['file_name']
+                        $postID,
+                        $this->upload->data()['file_name']
                     );
                 }
 
@@ -76,5 +82,4 @@ class News extends CI_Controller {
         $this->load->view('navBar');
         $this->load->view('post/add_news');
     }
-
 }

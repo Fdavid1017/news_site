@@ -1,14 +1,17 @@
 <?php
 
-class News_model extends CI_Model {
+class News_model extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->load->database();
     }
 
-    public function get_list() {
+    public function get_list()
+    {
         $this->db->select('*');
         $this->db->from('post');
         $this->db->order_by('add_date', 'ASC');
@@ -18,7 +21,8 @@ class News_model extends CI_Model {
         return $result;
     }
 
-    public function update($id, $user_email, $text, $category_id, $add_date) {
+    public function update($id, $user_email, $text, $category_id, $add_date)
+    {
         $record = [
             'user_email' => $user_email,
             'text' => $text,
@@ -29,25 +33,48 @@ class News_model extends CI_Model {
         return $this->db->update('post', $record);
     }
 
-    public function select_by_id($id) {
+    public function select_by_id($id)
+    {
         $this->db->select("*");
         $this->db->from('post');
         $this->db->where('id', $id);
 
         return $this->db->get()
-                        ->row();
+            ->row();
     }
 
-    public function select_by_user_email($email) {
+    public function select_by_user_email($email)
+    {
         $this->db->select("*");
         $this->db->from('post');
         $this->db->where('user_email', $email);
 
         return $this->db->get()
-                        ->row();
+            ->row();
     }
 
-    public function insert($user_email, $text, $category_id, $add_date) {
+    public function select_by_text_and_category($text, $category)
+    {
+        $querryArgs = "SELECT * FROM post";
+        if ($category === 0) {
+            if ($text !== '') {
+                $querryArgs = "SELECT * FROM post WHERE text LIKE '%" . $text . "%'";
+            }
+        } else {
+            if ($text !== '') {
+                $querryArgs = "SELECT * FROM post WHERE text LIKE '%" . $text . "%' AND category_id = " . $category;
+            } else {
+                $querryArgs = "SELECT * FROM post WHERE category_id = " . $category;
+            }
+        }
+
+        $query = $this->db->query($querryArgs);
+        $result = $query->result();
+        return $result;
+    }
+
+    public function insert($user_email, $text, $category_id, $add_date)
+    {
         $record = [
             'user_email' => $user_email,
             'text' => $text,
@@ -57,5 +84,4 @@ class News_model extends CI_Model {
         $this->db->insert('post', $record);
         return $this->db->insert_id();
     }
-
 }
