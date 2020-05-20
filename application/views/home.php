@@ -1,22 +1,39 @@
 <h1>Home</h1>
 
-<?php
-$temp = $this->news_model->select_by_text_and_category('', 1);
-print_r($temp);
-?>
-
 <div class="row">
     <div class="col-3">
         <?php if ($this->session->userdata('current_user')) : ?>
             <a class="btn btn-primary" href="<?php echo base_url('news/addnews') ?>">Add news</a>
             </br>
         <?php endif; ?>
-        
+
+        <?php
+        echo form_open();
+
+        $categories = [];
+        array_push($categories, 'Any');
+        foreach ($this->category_model->get_list() as $value) {
+            array_push($categories, $value->name);
+        }
+
+        echo form_label('Text:', 'text');
+        echo form_input('text', set_value('text', ''), ['id' => 'text']);
+        echo '</br>';
+
+        echo form_label('Categorys:', 'category_id');
+        echo form_dropdown('category_id', $categories, 'category_id');
+        echo '</br>';
+
+        echo form_submit('submit', 'Search');
+
+        echo form_close();
+        ?>
     </div>
+
     <div class="col">
-        <?php if ($this->news_model->get_list()) : ?>
+        <?php if ($this->session->userdata('news')) : ?>
             <div class="card-columns">
-                <?php foreach ($this->news_model->get_list() as $value) : ?>
+                <?php foreach ($this->session->userdata('news') as $value) : ?>
                     <div class="card text-center border-primary pointer" style="width: 18rem;">
                         <?php
                         $imagesNames = $this->news_images_model->select_by_postID($value->id);

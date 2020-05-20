@@ -56,7 +56,7 @@ class News_model extends CI_Model
     public function select_by_text_and_category($text, $category)
     {
         $querryArgs = "SELECT * FROM post";
-        if ($category === 0) {
+        if ($category === '0') {
             if ($text !== '') {
                 $querryArgs = "SELECT * FROM post WHERE text LIKE '%" . $text . "%'";
             }

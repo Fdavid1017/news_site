@@ -14,6 +14,16 @@ class News extends CI_Controller
 
     public function index()
     {
+        if ($this->input->post('submit')) {
+            $text = '';
+            $category_id = 0;
+            $text =  $this->input->post('text');
+            $category_id = $this->input->post('category_id');
+            $this->session->set_userdata('news', $this->news_model->select_by_text_and_category($text, $category_id));
+        } else {
+            $this->session->set_userdata('news', $this->news_model->get_list());
+        }
+
         $this->load->helper('form');
         $this->load->view('header');
         $this->load->view('navBar');
