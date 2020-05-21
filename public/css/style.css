@@ -1,7 +1,11 @@
-.news_image{
-    max-height: 150px !important;
+.news_image {
+	max-height: 150px !important;
 }
 
 .pointer {
-    cursor: pointer !important;
+	cursor: pointer !important;
+}
+
+body {
+	background-color: #ecf0f3;
 }

@@ -10,6 +10,8 @@ class News extends CI_Controller
         $this->load->model('news_model');
         $this->load->model('category_model');
         $this->load->model('news_images_model');
+        $this->load->model('user_model');
+        $this->load->model('comment_model');
     }
 
     public function index()
@@ -40,7 +42,7 @@ class News extends CI_Controller
                 $postID = $this->news_model->insert(
                     $this->session->userdata('current_user')->email,
                     $this->input->post('text'),
-                    $this->input->post('category_id') + 1,
+                    $this->input->post('category_id'),
                     date("Y-m-d h:i:s")
                 );
 

@@ -1,14 +1,17 @@
 <?php
 
-class Category_model extends CI_Model {
+class Category_model extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->load->database();
     }
 
-    public function get_list() {
+    public function get_list()
+    {
         $this->db->select('*');
         $this->db->from('category');
         $this->db->order_by('id', 'ASC');
@@ -18,7 +21,8 @@ class Category_model extends CI_Model {
         return $result;
     }
 
-    public function update($id, $name) {
+    public function update($id, $name)
+    {
         $record = [
             'name' => $name
         ];
@@ -26,16 +30,18 @@ class Category_model extends CI_Model {
         return $this->db->update('category', $record);
     }
 
-    public function select_by_id($id) {
+    public function select_by_id($id)
+    {
         $this->db->select("*");
         $this->db->from('category');
         $this->db->where('id', $id);
 
         return $this->db->get()
-                        ->row();
+            ->row();
     }
 
-    public function insert($name) {
+    public function insert($name)
+    {
         $record = [
             'name' => $name
         ];
@@ -43,4 +49,10 @@ class Category_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function delete($id)
+    {
+        $this->db->from('category');
+        $this->db->where('id', $id);
+        $this->db->delete();
+    }
 }

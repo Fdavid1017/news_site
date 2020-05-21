@@ -8,10 +8,16 @@ echo form_error('text');
 echo '</br>';
 
 $categories = [];
+$list = $this->category_model->get_list();
 
-foreach ($this->category_model->get_list() as $value) {
-    array_push($categories, $value->name);
+for ($i = 0; $i < count($list); $i++) {
+    $value = [$list[$i]->id => $list[$i]->name];
+    $categories[$i] = $value;
 }
+
+/*foreach ($this->category_model->get_list() as $value) {
+    array_push($categories, $value->name);
+}*/
 
 echo form_label('Categorys:', 'category_id');
 echo form_dropdown('category_id', $categories, 'category_id');

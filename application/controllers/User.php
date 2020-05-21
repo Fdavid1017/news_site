@@ -1,22 +1,26 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('user_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->load->view('header');
         $this->load->view('navBar');
         $this->load->view('home');
     }
 
-    public function Register() {
+    public function Register()
+    {
         if ($this->input->post('submit')) {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('first_name', 'First name', 'trim|required');
@@ -43,11 +47,13 @@ class User extends CI_Controller {
                     echo '<script>console.log("' . $upload_config['file_name'] . ' uploaded succesfully";</script>';
                 }
 
-                $this->user_model->insert($this->input->post('first_name'),
-                        $this->input->post('second_name'),
-                        $this->input->post('email'),
-                        $this->input->post('password'),
-                        $this->upload->data()['file_name']);
+                $this->user_model->insert(
+                    $this->input->post('first_name'),
+                    $this->input->post('second_name'),
+                    $this->input->post('email'),
+                    $this->input->post('password'),
+                    $this->upload->data()['file_name']
+                );
 
                 $this->load->helper('url');
                 redirect(base_url('user/login'));
@@ -60,7 +66,8 @@ class User extends CI_Controller {
         $this->load->view('user/register');
     }
 
-    public function Login() {
+    public function Login()
+    {
         if ($this->input->post('submit')) {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -82,10 +89,19 @@ class User extends CI_Controller {
         $this->load->view('user/login');
     }
 
-    public function ShowProfile() {
-        $this->load->view('header');
+    public function ShowProfile($email)
+    {
+        $user = null;
+        $user = $this->user_model->select_by_id($email);
+        $data = array('user' => $user);
+        $this->load->view('header', $data);
         $this->load->view('navBar');
         $this->load->view('user/profile');
     }
 
+    public function LogOut()
+    {
+        unset($_SESSION['current_user']);
+        redirect(base_url());
+    }
 }
