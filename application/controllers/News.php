@@ -94,4 +94,26 @@ class News extends CI_Controller
         $this->load->view('navBar');
         $this->load->view('post/add_news');
     }
+
+    public function saveToJson($post_id)
+    {
+        $post = $this->news_model->select_by_id($post_id);
+        $images = $this->news_images_model->select_by_postID($post_id);
+        $imgs = [];
+
+        foreach ($images as $value) {
+            array_push($imgs, [$value->id => base64_encode(file_get_contents(base_url('uploads/images/news/' . $value->picture)))]);
+        }
+
+        $post->images = $imgs;
+        //echo json_encode($post);
+        /*$this->load->helper('file');
+        write_file($post->id . '_news.json', json_encode($post));*/
+
+        $this->load->helper('download');
+        force_download($post->id . '_news.json', json_encode($post));
+
+        $this->load->helper('url');
+        redirect(base_url());
+    }
 }

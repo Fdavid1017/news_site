@@ -123,14 +123,15 @@
                                 <div class="modal-footer">
                                     <div class="row p-0 m-0 w-100">
                                         <div class="col p-0 m-0 btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-comment-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-comment-<?php echo $value->id ?>">
+                                                Show comments
+                                            </button>
                                             <?php if ($this->session->userdata('current_user')) : ?>
-                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-comment-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-comment-<?php echo $value->id ?>">
-                                                    Show comments
-                                                </button>
                                                 <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-<?php echo $value->id ?>">
                                                     Add comment
                                                 </button>
                                             <?php endif; ?>
+                                            <a class="btn btn-secondary" href="<?php echo base_url('news/saveToJson/' . $value->id); ?>">Save to JSON</a>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
