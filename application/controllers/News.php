@@ -95,14 +95,18 @@ class News extends CI_Controller
         $this->load->view('post/add_news');
     }
 
-    public function saveToJson($post_id)
+    public function saveToJson($post_id, $base64)
     {
         $post = $this->news_model->select_by_id($post_id);
         $images = $this->news_images_model->select_by_postID($post_id);
         $imgs = [];
 
         foreach ($images as $value) {
-            array_push($imgs, [$value->id => base64_encode(file_get_contents(base_url('uploads/images/news/' . $value->picture)))]);
+            if ($base64 === 'true') {
+                array_push($imgs, [$value->id => base64_encode(file_get_contents(base_url('uploads/images/news/' . $value->picture)))]);
+            } else {
+                array_push($imgs, [$value->id => $value->picture]);
+            }
         }
 
         $post->images = $imgs;

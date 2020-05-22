@@ -123,16 +123,22 @@
                                 <div class="modal-footer">
                                     <div class="row p-0 m-0 w-100">
                                         <div class="col p-0 m-0 btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-comment-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-comment-<?php echo $value->id ?>">
+                                            <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapse-comment-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-comment-<?php echo $value->id ?>">
                                                 Show comments
                                             </button>
                                             <?php if ($this->session->userdata('current_user')) : ?>
-                                                <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-<?php echo $value->id ?>">
+                                                <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapse-<?php echo $value->id ?>" aria-expanded="false" aria-controls="collapse-<?php echo $value->id ?>">
                                                     Add comment
                                                 </button>
                                             <?php endif; ?>
-                                            <a class="btn btn-secondary" href="<?php echo base_url('news/saveToJson/' . $value->id); ?>">Save to JSON</a>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Download as
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="<?php echo base_url('news/saveToJson/' . $value->id . "/true"); ?>">Json with Base64</a>
+                                                <a class="dropdown-item" href="<?php echo base_url('news/saveToJson/' . $value->id . "/false"); ?>">Json with Names</a>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                     <div class="collapse w-100 m-0 p-0 mt-3" id="collapse-comment-<?php echo $value->id ?>">
