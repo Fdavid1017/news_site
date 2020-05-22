@@ -40,6 +40,16 @@ class Category_model extends CI_Model
             ->row();
     }
 
+    public function select_by_name($name)
+    {
+        $this->db->select("*");
+        $this->db->from('category');
+        $this->db->where('name', $name);
+
+        return $this->db->get()
+            ->row();
+    }
+
     public function insert($name)
     {
         $record = [

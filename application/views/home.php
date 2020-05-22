@@ -1,7 +1,10 @@
 <div class="row m-5">
-    <div class="col-3 mr-4 text-center">
+    <div class="col-3 mr-4 mb-3 text-center">
         <?php if ($this->session->userdata('current_user')) : ?>
-            <a class="shadow mt-3 btn btn-outline-dark" href="<?php echo base_url('news/addnews') ?>">Add news</a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="shadow mt-3 btn btn-outline-dark" href="<?php echo base_url('news/addnews') ?>">Add news</a>
+                <a class="shadow mt-3 btn btn-outline-dark" href="<?php echo base_url('news/addfromfile') ?>">Add from file </a>
+            </div>
             </br>
         <?php endif; ?>
 

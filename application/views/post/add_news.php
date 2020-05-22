@@ -12,18 +12,17 @@
                     <?php echo form_textarea('text', set_value('text', ''), ['id' => 'text', 'rows' => '2', 'required' => 'required', 'placeholder' => 'Text', 'class' => 'form-control']); ?>
                 </div>
                 <?php echo form_error('text'); ?>
-                <?php echo '</br>';
-
-
-                $categories = [];
-                $list = $this->category_model->get_list();
-
-                for ($i = 0; $i < count($list); $i++) {
-                    $value = [$list[$i]->id => $list[$i]->name];
-                    $categories[$i] = $value;
-                } ?>
+                <?php echo '</br>'; ?>
             </div>
 
+            <?php
+            $categories = [];
+            $list = $this->category_model->get_list();
+
+            for ($i = 0; $i < count($list); $i++) {
+                $value = [$list[$i]->id => $list[$i]->name];
+                $categories[$i] = $value;
+            } ?>
             <div class="row ml-3 mr-3 mt-3">
                 <div class="col">
                     <?php echo form_label('Categorys:', 'category_id'); ?>

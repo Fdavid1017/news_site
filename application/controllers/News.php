@@ -120,4 +120,48 @@ class News extends CI_Controller
         $this->load->helper('url');
         redirect(base_url());
     }
+
+    public function addFromFile()
+    {
+        if ($this->input->post('submit')) {
+
+            $upload_config['allowed_types'] = 'txt';
+            $upload_config['max_size'] = 2048;
+            $upload_config['min_height'] = 250;
+            $upload_config['min_width'] = 250;
+
+            $upload_config['upload_path'] = './uploads/text/news/';
+            $upload_config['file_ext_tolower'] = TRUE;
+            $upload_config['overwrite'] = TRUE;
+
+            $this->load->library('upload');
+
+            $upload_config['file_name'] = 'temp';
+            $this->upload->initialize($upload_config);
+            if ($this->upload->do_upload('file') == TRUE) {
+                $fp = fopen('./uploads/text/news/' . $this->upload->data()['file_name'], "r");
+                $content = fread($fp, 8192);
+                fclose($fp);
+
+                $this->load->helper("file");
+                unlink('./uploads/text/news/' . $this->upload->data()['file_name']);
+
+                $postID = $this->news_model->insert(
+                    $this->session->userdata('current_user')->email,
+                    $content,
+                    $this->input->post('category_id'),
+                    date("Y-m-d h:i:s")
+                );
+
+                echo $postID;
+                $this->load->helper('url');
+                redirect(base_url());
+            }
+        } else {
+            $this->load->helper('form');
+            $this->load->view('header');
+            $this->load->view('navBar');
+            $this->load->view('post/load_from_file');
+        }
+    }
 }
