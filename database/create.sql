@@ -10,16 +10,6 @@ CREATE TABLE IF NOT EXISTS `User` (
 	PRIMARY KEY (`email`)
 );
 
-INSERT INTO
-	user (email, first_name, second_name, password, role_id)
-VALUES
-	('admin@admin.hu', 'admin', 'admin', 'admin123', 1);
-
-INSERT INTO
-	user (email, first_name, second_name, password)
-VALUES
-	('user@user.hu', 'first', 'second', 'user0123');
-
 CREATE TABLE IF NOT EXISTS `post` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_email` VARCHAR(255) NOT NULL,
