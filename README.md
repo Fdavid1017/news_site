@@ -3,8 +3,12 @@
 **Installation:**
  1. Copy the `news_site` folder to the wamp server's `www` folder
  2. Create the database based on the `news_site\database\create.sql` file
- 3. Inside the `news_site\application\config\database.php` change the `hostname` port number of your MySql server if needed
- 4. Go to [http://localhost/news_site/](http://localhost/news_site/)
+ 3. Create the following folder structure:
+    - `news_site\uploads\images\news`
+    - `news_site\uploads\images\user`
+    - `news_site\uploads\text\news`
+ 4. Inside the `news_site\application\config\database.php` change the `hostname` port number of your MySql server if needed
+ 5. Go to [http://localhost/news_site/](http://localhost/news_site/)
 
 If You created the database based on the `create.sql` You should have some base value and an user with the following datas:
 |Email|Password  |
