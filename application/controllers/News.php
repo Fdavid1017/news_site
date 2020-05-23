@@ -110,9 +110,6 @@ class News extends CI_Controller
         }
 
         $post->images = $imgs;
-        //echo json_encode($post);
-        /*$this->load->helper('file');
-        write_file($post->id . '_news.json', json_encode($post));*/
 
         $this->load->helper('download');
         force_download($post->id . '_news.json', json_encode($post));

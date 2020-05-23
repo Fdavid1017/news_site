@@ -1,3 +1,9 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+
+?>
+
 <div class="row m-5">
     <div class="col-3 mr-4 mb-3 text-center">
         <?php if ($this->session->userdata('current_user')) : ?>
@@ -24,7 +30,7 @@
         echo '</div>';
 
         echo '<div class="row mt-3">';
-        echo '<b>' . form_label('Categorys:', 'category_id', ['class' => 'mr-2']) . '</b>';
+        echo '<b>' . form_label('Category:', 'category_id', ['class' => 'mr-2']) . '</b>';
         echo form_dropdown('category_id', $categories, 'category_id', ['class' => 'form-control col']);
         echo '</br>';
         echo '</div>';

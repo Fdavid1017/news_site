@@ -1,3 +1,7 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+?>
+
 <div class="d-flex justify-content-center mt-5">
     <div class="shadow card">
         <div class="card-body p-3">

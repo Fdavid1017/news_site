@@ -74,13 +74,14 @@ class User extends CI_Controller
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
             if ($this->form_validation->run() == TRUE) {
                 $user = $this->user_model->select_by_id($this->input->post('email'));
-
-                if (password_verify($this->input->post('password'), $user->password)) {
-                    $this->load->library('session');
-                    $this->session->set_userdata('current_user', $user);
-
-                    $this->load->helper('url');
-                    redirect(base_url());
+                if ($user !== null) {
+                    if (password_verify($this->input->post('password'), $user->password)) {
+                        $this->load->library('session');
+                        $this->session->set_userdata('current_user', $user);
+                        
+                        $this->load->helper('url');
+                        redirect(base_url());
+                    }
                 }
             }
         }

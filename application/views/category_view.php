@@ -1,3 +1,13 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+if (!$this->session->userdata('current_user')) {
+    exit('Login to access this page!');
+} else if ($this->session->userdata('current_user')->role_id !== 1) {
+    exit('Login with an admin account to access this page!');
+}
+?>
+
 <div class="d-flex justify-content-center mt-5 mb-5">
     <div class="shadow card">
         <div class="card-body p-3">

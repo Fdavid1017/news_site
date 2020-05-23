@@ -1,3 +1,9 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+
+?>
+
 <?php $this->load->library('session'); ?>
 
 <nav class="navbar navbar-light bg-light">
